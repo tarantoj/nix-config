@@ -18,7 +18,7 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
-      bbenoist.Nix
+      bbenoist.nix
       # dracula-theme.theme-dracula
       # vscodevim.vim
       # yzhang.markdown-all-in-one
