@@ -65,7 +65,7 @@
 
       nixosConfigurations = {
         # FIXME replace with your hostname
-        your-hostname = nixpkgs.lib.nixosSystem {
+        nixos = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages.x86_64-linux;
           specialArgs = { inherit inputs; }; # Pass flake inputs to our config
           modules = (builtins.attrValues nixosModules) ++ [
@@ -77,7 +77,7 @@
 
       homeConfigurations = {
         # FIXME replace with your username@hostname
-        "your-username@your-hostname" = home-manager.lib.homeManagerConfiguration {
+        "james@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
           modules = (builtins.attrValues homeManagerModules) ++ [
