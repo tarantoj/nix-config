@@ -123,6 +123,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+  services.xserver.libinput.mouse.accelProfile = "flat";
 
 
   # This setups a SSH server. Very important if you're setting up a headless system.
