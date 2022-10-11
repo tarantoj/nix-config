@@ -26,11 +26,12 @@
   };
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
+  home.packages = with pkgs; [ mpv ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+  # programs.zsh.enable = true;
 
   programs.google-chrome.enable = true;
 
