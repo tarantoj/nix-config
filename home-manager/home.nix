@@ -15,6 +15,15 @@
     homeDirectory = "/home/james";
   };
 
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      bbenoist.Nix
+      # dracula-theme.theme-dracula
+      # vscodevim.vim
+      # yzhang.markdown-all-in-one
+    ];
+  };
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
