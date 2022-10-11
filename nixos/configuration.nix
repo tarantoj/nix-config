@@ -18,6 +18,8 @@
     # You can also split up your configuration and import pieces of it here.
   ];
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
