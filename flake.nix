@@ -17,7 +17,7 @@
     # nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs = { nixpkgs, hardware, home-manager, ... }@inputs:
     let
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-linux"
@@ -71,6 +71,9 @@
           modules = (builtins.attrValues nixosModules) ++ [
             # > Our main nixos configuration file <
             ./nixos/configuration.nix
+            hardware.nixosModules.common-cpu-intel
+            hardware.nixosModules.common-pc-laptop
+            hardware.nixosModules.common-pc-laptop-ssd
           ];
         };
       };
