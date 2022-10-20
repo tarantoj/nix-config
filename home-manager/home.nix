@@ -26,7 +26,12 @@
   };
   # Add stuff for your user as you see fit:
   # programs.neovim.enable = true;
-  home.packages = with pkgs; [ mpv ];
+  home.packages = with pkgs; [ 
+    mpv
+    gnomeExtensions.pop-shell
+    gnome.gnome-tweaks
+    calibre
+    ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
