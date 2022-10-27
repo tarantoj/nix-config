@@ -65,22 +65,20 @@
 
       nixosConfigurations = {
         # FIXME replace with your hostname
-        nixos = nixpkgs.lib.nixosSystem {
+        framework = nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages.x86_64-linux;
           specialArgs = { inherit inputs; }; # Pass flake inputs to our config
           modules = (builtins.attrValues nixosModules) ++ [
             # > Our main nixos configuration file <
             ./nixos/configuration.nix
-            hardware.nixosModules.common-cpu-intel
-            hardware.nixosModules.common-pc-laptop
-            hardware.nixosModules.common-pc-laptop-ssd
+            hardware.nixosModules.framework-12th-gen-intel
           ];
         };
       };
 
       homeConfigurations = {
         # FIXME replace with your username@hostname
-        "james@nixos" = home-manager.lib.homeManagerConfiguration {
+        "james@framework" = home-manager.lib.homeManagerConfiguration {
           pkgs = legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
           modules = (builtins.attrValues homeManagerModules) ++ [
