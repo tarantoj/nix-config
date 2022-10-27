@@ -7,6 +7,7 @@
     # If you want to use modules from other flakes (such as nixos-hardware), use something like:
     # inputs.hardware.nixosModules.common-cpu-amd
     # inputs.hardware.nixosModules.common-ssd
+    inputs.hardware.nixosModules.framework-12th-gen-intel
 
     # It's strongly recommended you take a look at
     # https://github.com/nixos/nixos-hardware
@@ -32,10 +33,20 @@
     "/crypto_keyfile.bin" = null;
   };
 
-  # Enable swap on luks
-  boot.initrd.luks.devices."luks-545af6bf-bc87-4b0e-be86-6f4f1cd06c3e".device = "/dev/disk/by-uuid/545af6bf-bc87-4b0e-be86-6f4f1cd06c3e";
-  boot.initrd.luks.devices."luks-545af6bf-bc87-4b0e-be86-6f4f1cd06c3e".keyFile = "/crypto_keyfile.bin";
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-14c0c12e-c897-4b7c-955e-fd31a20b1615".device = "/dev/disk/by-uuid/14c0c12e-c897-4b7c-955e-fd31a20b1615";
+  boot.initrd.luks.devices."luks-14c0c12e-c897-4b7c-955e-fd31a20b1615".keyFile = "/crypto_keyfile.bin";
+
+  # Flatpak
+  services.flatpak.enable = true;
+
+  # virtualisation
+  # Doesn't work on alder lake yet
+  #virtualisation.kvmgt.enable = true;
+  virtualisation.libvirtd.enable = true;
+  environment.systemPackages = with pkgs; [ virt-manager ];
 
   nix = {
     # This will add each flake input as a registry
@@ -59,7 +70,7 @@
   # FIXME: Add the rest of your current configuration
 
   # TODO: Set your hostname
-  networking.hostName = "nixos";
+  networking.hostName = "framework";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -73,15 +84,59 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Fonts
+  fonts.fonts = with pkgs; [
+    corefonts
+  ];
+
+  # 32bit
+  hardware.opengl.driSupport32Bit = true;
+
+  # Steam
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
+
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.gnomeExtensions.gsconnect;
+  };
+
+
+  hardware.steam-hardware.enable = true;
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
+  services.power-profiles-daemon.enable = false;
+  services.gnome.gnome-browser-connector.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
+
+  programs.dconf.enable = true;
+  environment.sessionVariables= {
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "\${HOME}/.steam/root/compatibilitytools.d";
+    NIXOS_OZONE_WL = "1";
+  };
+
+  # Suspend then hibernate
+  services.logind = {
+    lidSwitch = "suspend-then-hibernate";
+    extraConfig = ''
+      HandlePowerKey=suspend-then-hibernate
+      IdleAction=suspend-then-hibernate
+      IdleActionSec=2m
+    '';
+  };
+  systemd.sleep.extraConfig = "HibernateDelaySec=2h";
+
 
   # Enable CUPS to print documents.
   services.printing.enable = false;
@@ -100,7 +155,7 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     };
   };
 

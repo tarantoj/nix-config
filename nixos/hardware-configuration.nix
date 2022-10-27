@@ -8,17 +8,17 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a04cb8fa-1844-4523-b5ca-3d6e1e634242";
+    { device = "/dev/disk/by-uuid/86d92d25-98ad-4d2e-9a7d-a8bd83721d4b";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-d2e22ee9-7e72-4072-817d-9a3e58af44d5".device = "/dev/disk/by-uuid/d2e22ee9-7e72-4072-817d-9a3e58af44d5";
+  boot.initrd.luks.devices."luks-408d2f7a-3afe-4d79-833b-0f6df6c19384".device = "/dev/disk/by-uuid/408d2f7a-3afe-4d79-833b-0f6df6c19384";
 
   fileSystems."/nix/store" =
     { device = "/nix/store";
@@ -27,12 +27,12 @@
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/FE33-45EB";
+    { device = "/dev/disk/by-uuid/C2AB-AC6C";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/2891c442-6fd5-48c9-9b4f-85beac654b72"; }
+    [ { device = "/dev/disk/by-uuid/3220c383-6d8f-49f3-b371-d1be3a1275b8"; }
     ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -40,10 +40,11 @@
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s20f0u6u3u3.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp166s0.useDHCP = lib.mkDefault true;
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # high-resolution display
+  hardware.video.hidpi.enable = lib.mkDefault true;
 }
