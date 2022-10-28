@@ -25,6 +25,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.plymouth = {
+    enable = true;
+    # theme = "breeze";
+    extraConfig = "DeviceScale=2";
+  };
+  boot.initrd.systemd.enable = true;
+  boot.kernelParams = ["quiet"];
 
   services.fwupd.enable = true;
 
@@ -88,6 +95,7 @@
   fonts.fonts = with pkgs; [
     corefonts
   ];
+  fonts.fontDir.enable = true;
 
   # 32bit
   hardware.opengl.driSupport32Bit = true;
@@ -179,6 +187,7 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
   services.xserver.libinput.mouse.accelProfile = "flat";
+  services.joycond.enable = true;
 
 
   # This setups a SSH server. Very important if you're setting up a headless system.
