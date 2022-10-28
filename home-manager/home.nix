@@ -15,13 +15,17 @@
     homeDirectory = "/home/james";
   };
 
+  # xdg.desktopEntries.microsoft-edge = {
+  #   exec = "${pkgs.microsoft-edge}/bin/microsoft-edge %U -enable-features=UseOzonePlatform -ozone-platform=wayland";
+  # };
+
   programs.firefox = {
     enable = true;
     # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
     #   https-everywhere
     #   privacy-badger
     # ];
-    enableGnomeExtensions = true;
+    # enableGnomeExtensions = true;
     # settings.graphics = {
     #   "media.ffmpeg.vaapi.enables" = true;
     # };
@@ -77,8 +81,6 @@
     microsoft-edge
     rnix-lsp
     vlc
-    plex-media-player
-    joycond
     signal-desktop
     mangohud
     gamescope
@@ -93,6 +95,13 @@
     gnome.gnome-tweaks
     calibre
     powertop
+    gnome.gnome-power-manager
+    transmission-gtk
+    transmission-remote-gtk
+    plex-mpv-shim
+    sm64ex
+    protontricks
+    protonup
   ];
 
   # Enable home-manager and git
