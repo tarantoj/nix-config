@@ -21,6 +21,13 @@
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
+  # gc
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
