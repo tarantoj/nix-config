@@ -16,7 +16,7 @@
   };
 
   # xdg.desktopEntries.microsoft-edge = {
-  #   exec = "${pkgs.microsoft-edge}/bin/microsoft-edge %U -enable-features=UseOzonePlatform -ozone-platform=wayland";
+  #   exec = "${pkgs.microsoft-edge}/bin/microsoft-edge %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WebRTCPipeWireCapturer";
   # };
 
   programs.firefox = {
@@ -62,6 +62,19 @@
     };
   };
 
+  programs.mpv = {
+    enable = true;
+    config = {
+      profile = "gpu-hq";
+      force-window = true;
+      ytdl-format = "bestvideo+bestaudio";
+      # cache-default = 4000000;
+      sub-auto = "fuzzy";
+      gpu-context = "wayland";
+      save-position-on-quit = true;
+    };
+  };
+
 
   programs.vscode = {
     enable = true;
@@ -90,7 +103,6 @@
     heroic
     lutris
     quickemu
-    mpv
     gnomeExtensions.pop-shell
     gnome.gnome-tweaks
     calibre
@@ -102,6 +114,9 @@
     sm64ex
     protontricks
     protonup
+    wineWowPackages.stable
+    winetricks
+    obsidian
   ];
 
   # Enable home-manager and git
