@@ -38,7 +38,7 @@
     extraConfig = "DeviceScale=2";
   };
   boot.initrd.systemd.enable = true;
-  boot.kernelParams = ["quiet"];
+  boot.kernelParams = ["quiet" "resume_offset=119097344"];
 
   services.fwupd.enable = true;
 
@@ -48,10 +48,13 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.resumeDevice = "/dev/disk/by-uuid/86d92d25-98ad-4d2e-9a7d-a8bd83721d4b";
 
   # Enable swap on luks
-  boot.initrd.luks.devices."luks-14c0c12e-c897-4b7c-955e-fd31a20b1615".device = "/dev/disk/by-uuid/14c0c12e-c897-4b7c-955e-fd31a20b1615";
-  boot.initrd.luks.devices."luks-14c0c12e-c897-4b7c-955e-fd31a20b1615".keyFile = "/crypto_keyfile.bin";
+  # boot.initrd.luks.devices."luks-14c0c12e-c897-4b7c-955e-fd31a20b1615".device = "/dev/disk/by-uuid/14c0c12e-c897-4b7c-955e-fd31a20b1615";
+  # boot.initrd.luks.devices."luks-14c0c12e-c897-4b7c-955e-fd31a20b1615".keyFile = "/crypto_keyfile.bin";
+
+
 
   # Flatpak
   services.flatpak.enable = true;
@@ -101,6 +104,10 @@
   # Fonts
   fonts.fonts = with pkgs; [
     corefonts
+    noto-fonts
+    vistafonts
+    source-code-pro
+    cascadia-code
   ];
   fonts.fontDir.enable = true;
 
@@ -126,7 +133,7 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.displayManager.gdm.wayland = true;
-  services.power-profiles-daemon.enable = false;
+  # services.power-profiles-daemon.enable = false;
   services.gnome.gnome-browser-connector.enable = true;
 
   # Configure keymap in X11
@@ -150,7 +157,7 @@
       IdleActionSec=2m
     '';
   };
-  systemd.sleep.extraConfig = "HibernateDelaySec=2h";
+  systemd.sleep.extraConfig = "HibernateDelaySec=1h";
 
 
   # Enable CUPS to print documents.
