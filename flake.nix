@@ -60,6 +60,22 @@
           # Instead, you should set nixpkgs configs here
           # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
           config.allowUnfree = true;
+          config.packageOverrides = pkgs: {
+            steam = pkgs.steam.override {
+              extraPkgs = pkgs: with pkgs; [
+                xorg.libXcursor
+                xorg.libXi
+                xorg.libXinerama
+                xorg.libXScrnSaver
+                libpng
+                libpulseaudio
+                libvorbis
+                stdenv.cc.cc.lib
+                libkrb5
+                keyutils
+              ];
+            };
+          };
         }
       );
 
