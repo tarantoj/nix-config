@@ -90,7 +90,7 @@
   # programs.neovim.enable = true;
   home.packages = with pkgs; [
     discord
-    gnome-secrets
+    # gnome-secrets
     microsoft-edge
     rnix-lsp
     vlc
@@ -103,11 +103,11 @@
     heroic
     lutris
     quickemu
-    gnomeExtensions.pop-shell
-    gnome.gnome-tweaks
+    # gnomeExtensions.pop-shell
+    # gnome.gnome-tweaks
     calibre
     powertop
-    gnome.gnome-power-manager
+    # gnome.gnome-power-manager
     transmission-gtk
     transmission-remote-gtk
     plex-mpv-shim
