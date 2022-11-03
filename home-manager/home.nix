@@ -104,7 +104,9 @@
     lutris
     quickemu
     gnomeExtensions.pop-shell
+    gnome-browser-connector
     gnome.gnome-tweaks
+    gnomeExtensions.appindicator
     calibre
     powertop
     gnome.gnome-power-manager
@@ -117,6 +119,7 @@
     wineWowPackages.stable
     winetricks
     obsidian
+    gnome.dconf-editor
   ];
 
   # Fix icons and fonts in flatpak
