@@ -11,6 +11,13 @@ let
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
+      microsoft-edge = prev.microsoft-edge.overrideAttrs (oldAttrs: {
+        installPhase = (oldAttrs.installPhase or "") + ''
+          substituteInPlace $out/share/applications/microsoft-edge.desktop \
+            --replace "$out/bin/microsoft-edge" "$out/bin/microsoft-edge --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WebRTCPipeWireCapturer"
+        '';
+      });
+
   };
 in
 inputs.nixpkgs.lib.composeManyExtensions [ additions modifications ]
