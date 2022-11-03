@@ -117,6 +117,8 @@
     winetricks
     obsidian
     gnome.dconf-editor
+    ventoy-bin
+    prusa-slicer
   ];
 
   # Fix icons and fonts in flatpak
