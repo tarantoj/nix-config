@@ -62,7 +62,7 @@
           config.allowUnfree = true;
           config.packageOverrides = pkgs: {
             discord = pkgs.discord.override {
-              nss = pkgs.nss_latest;
+              nss = pkgs.nss_latest; # https://nixos.wiki/wiki/Discord#Opening_Links_with_Firefox
             };
             ventoy-bin = pkgs.ventoy-bin.override {
               withGtk3 = true;
