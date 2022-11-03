@@ -119,6 +119,14 @@
     obsidian
   ];
 
+  # Fix icons and fonts in flatpak
+  home.file.".local/share/fonts".source = config.lib.file.mkOutOfStoreSymlink "/run/current-system/sw/share/X11/fonts";
+  home.file.".icons".source = config.lib.file.mkOutOfStoreSymlink "/run/current-system/sw/share/icons";
+  home.file.".local/share/flatpak/overrides/global".text = ''
+  [Context]
+  filesystems=/run/current-system/sw/share/X11/fonts:ro;/run/current-system/sw/share/icons:ro
+  '';
+
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
