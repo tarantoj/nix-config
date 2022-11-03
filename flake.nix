@@ -61,6 +61,12 @@
           # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
           config.allowUnfree = true;
           config.packageOverrides = pkgs: {
+            discord = pkgs.discord.override {
+              nss = pkgs.nss_latest;
+            };
+            ventoy-bin = pkgs.ventoy-bin.override {
+              withGtk3 = true;
+            };
             steam = pkgs.steam.override {
               extraPkgs = pkgs: with pkgs; [
                 xorg.libXcursor
