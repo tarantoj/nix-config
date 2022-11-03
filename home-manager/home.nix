@@ -15,9 +15,6 @@
     homeDirectory = "/home/james";
   };
 
-  # xdg.desktopEntries.microsoft-edge = {
-  #   exec = "${pkgs.microsoft-edge}/bin/microsoft-edge %U --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-features=WebRTCPipeWireCapturer";
-  # };
 
   programs.firefox = {
     enable = true;
