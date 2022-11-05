@@ -120,6 +120,9 @@
     enable = true;
     remotePlay.openFirewall = true;
   };
+  
+  # rdp
+  networking.firewall.allowedTCPPorts = [ 3389 5900 ];
 
   programs.kdeconnect = {
     enable = true;
