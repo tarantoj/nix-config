@@ -141,6 +141,9 @@
     "org/gnome/mutter" = {
       experimental-features = [ "scale-monitor-framebuffer" ];
     };
+    "org/gnome/desktop/remote-desktop/rdp" = {
+      screen-share-mode = "extend";
+    };
   };
 
   # Nicely reload system units when changing configs
