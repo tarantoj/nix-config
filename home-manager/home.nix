@@ -52,7 +52,7 @@
     # graphics = {
     #   "media.ffmpeg.vaapi.enabled" = true; "media.rdd-ffmpeg.enabled" = true; "media.navigator.medidataencoder_vpx_enabled" = true; };
     package = pkgs.wrapFirefox pkgs.firefox-unwrapped {
-      forceWayland = true;
+      # forceWayland = true;
       extraPolicies = {
         ExtensionSettings = { };
       };
@@ -110,7 +110,7 @@
     transmission-gtk
     transmission-remote-gtk
     plex-mpv-shim
-    sm64ex
+    # sm64ex
     protontricks
     protonup
     wineWowPackages.stable
@@ -118,7 +118,8 @@
     obsidian
     gnome.dconf-editor
     ventoy-bin
-    prusa-slicer
+    # prusa-slicer
+    keepassxc
   ];
 
   # Fix icons and fonts in flatpak
